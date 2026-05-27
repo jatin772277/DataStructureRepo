@@ -2,6 +2,15 @@
 #include<vector>
 #include<algorithm>
 using namespace std;
+// void Reverse(vector<int> &arr,int start,int end){
+//     while(start <= end){
+//         int temp = arr[start];
+//         arr[start] = arr[end];
+//         arr[end] = temp;
+//         start++;
+//         end--;
+//     }
+// }
 void printArray(vector<int> &arr){
     for(int i = 0;i < arr.size();i++){
         cout<<arr[i]<<" ";
