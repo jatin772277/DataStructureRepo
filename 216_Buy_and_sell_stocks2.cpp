@@ -4,6 +4,7 @@
 using namespace std;
 int helper(int ind,int buy,vector<int>& prices,vector<vector<int>>& dp,int n){
     if(ind == n) return 0;
+    if(dp[ind][buy] != -1) return dp[ind][buy];
     int profit = INT_MIN;
     if(buy){
         profit = max((-prices[ind] + helper(ind+1,0,prices,dp,n)) , (helper(ind+1,1,prices,dp,n)));
@@ -11,7 +12,7 @@ int helper(int ind,int buy,vector<int>& prices,vector<vector<int>>& dp,int n){
     else{
         profit = max((prices[ind] + helper(ind+1,1,prices,dp,n)) , helper(ind+1,0,prices,dp,n));
     }
-    return profit;
+    return dp[ind][buy] = profit;
 }
 int BuyNSellStock2Memo(vector<int>& prices){
     int n = prices.size();
