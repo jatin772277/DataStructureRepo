@@ -44,6 +44,18 @@ int LongestIncreasingSubsequenceSpaceOptimized(vector<int>& arr) {
     }
     return *max_element(dp.begin(), dp.end());
 }
+int LongestIncresingSubsequenceOptimizedApproach(vector<int> &arr){
+    int n = arr.size();
+    vector<int> dp(n,1);
+    int maxi = 1;
+    for(int i = 0;i < n;i++){
+        for(int prev = 0;prev < i;prev++){
+            if(arr[prev] < arr[i]) dp[i] = max(dp[i],1 + dp[prev]);
+        }
+        maxi = max(maxi,dp[i]);
+    }
+    return maxi;
+}
 int main(){
     vector<int> arr = {10,9,2,5,3,7,101,18};
     cout<<"LIC Means subsequence is sorted and highest length!!!"<<endl;
@@ -53,5 +65,7 @@ int main(){
     cout<<"max Length: "<<maxLen1<<endl;
     int maxLen2 = LongestIncreasingSubsequenceSpaceOptimized(arr);
     cout<<"max Length: "<<maxLen2<<endl;
+    int maxLen3 = LongestIncresingSubsequenceOptimizedApproach(arr);
+    cout<<"max Length: "<<maxLen3<<endl;
     return 0;
 }
