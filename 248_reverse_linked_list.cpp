@@ -46,11 +46,22 @@ Node* reverseLinkedList(Node* head){
     }
     return prev;
 }
+Node* reverseLinkedList2(Node* head){
+    if(!head || !head->next) return head;
+    Node* newHead = reverseLinkedList2(head->next);
+    Node* front = head->next;
+    front->next = head;
+    head->next = nullptr;
+    return newHead;
+}
 int main(){
     vector<int> arr = {1,2,3,4,5,6,7,8};
     Node* head = makeList(arr);
     PrintList(head);
     head = reverseLinkedList(head);
+    cout<<"Reversed Linked List: ";
+    PrintList(head);
+    head = reverseLinkedList2(head);
     cout<<"Reversed Linked List: ";
     PrintList(head);
     return 0;
