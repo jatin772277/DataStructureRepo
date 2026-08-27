@@ -38,12 +38,23 @@ void removeDuplicates(Node* head) {
     }
 }
 void printDLL(Node* head) {
-    while(head) {
-        cout << head->data;
-        if(head->next) cout << " <-> ";
-        head = head->next;
+    Node* curr = head;
+    Node* prevN = NULL;
+    while(curr) {
+        prevN = curr;
+        cout << curr->data;
+        if(curr->next) cout << " <-> ";
+        curr = curr->next;
     }
     cout << endl;
+    cout<<"print From back: ";
+    curr = prevN;
+    while(curr){
+        cout<<curr->data;
+        if(curr->prev) cout<<" <-> ";
+        curr = curr->prev;
+    }
+    cout<<endl;
 }
 int main() {
     Node* head = nullptr;
