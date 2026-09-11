@@ -52,6 +52,42 @@ Node* CopyListRandomPointer1(Node* head){
     }
     return returnHead;
 }
+void insertCopyInBetween(Node* head){
+    Node* curr = head;
+    while(curr){
+        Node* nextelement = curr->next;
+        Node* copyNode = new Node(curr->data);
+        copyNode->next = nextelement;
+        curr->next = copyNode;
+        curr = nextelement;
+    }
+}
+void connectRandomPointers(Node* head){
+    Node* curr = head;
+    while(curr){
+        Node* copyNode = curr->next;
+        if(curr->random) copyNode->random = curr->random->next;
+        else copyNode->random = nullptr;
+        curr = curr->next->next;
+    }
+}
+Node* getDeepCopyList(Node* head){
+    Node* temp = head;
+    Node* dummyNode = new Node(-1);
+    Node* res = dummyNode;
+    while(temp){
+        res->next = temp->next;
+        res = res->next;
+        temp->next = temp->next->next;
+        temp = temp->next;
+    }
+    return dummyNode->next;
+}
+Node* CopyListRandomPointer2(Node* head){
+    insertCopyInBetween(head);
+    connectRandomPointers(head);
+    return getDeepCopyList(head);
+}
 int main(){
     vector<int> arr = {7,13,10,11,1};
     Node* head = MakeList(arr);
@@ -66,5 +102,7 @@ int main(){
 
     Node* result = CopyListRandomPointer1(head);//Hashmap Implementation solution
     PrintList(result);
+    Node* result2 = CopyListRandomPointer2(head);
+    PrintList(result2);
     return 0;
 }
