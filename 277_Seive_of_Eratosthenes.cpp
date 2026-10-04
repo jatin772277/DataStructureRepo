@@ -2,6 +2,7 @@
 #include<vector>
 using namespace std;
 void PrintPrimes(int n){
+    if(n < 2) return;
     vector<int> Primes(n+1,1);
     Primes[0] = Primes[1] = 0;
     for(int i = 2;i*i <= n;i++){
