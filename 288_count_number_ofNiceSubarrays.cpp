@@ -1,21 +1,16 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-
 int AtMostK(vector<int>& arr, int k) {
     int left = 0, count = 0, odd = 0;
-
     for(int right = 0; right < arr.size(); right++) {
         odd += arr[right] % 2;
-
         while(odd > k) {
             odd -= arr[left] % 2;
             left++;
         }
-
         count += right - left + 1;
     }
-
     return count;
 }
 
